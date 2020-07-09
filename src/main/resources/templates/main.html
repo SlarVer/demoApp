@@ -15,7 +15,7 @@
         <div class="col-md-4 col-sm-4 col-xs-12"></div>
         <div class="col-md-4 col-sm-4 col-xs-12">
             <form class="form-container" style="text-align: center">
-                <h1 sec:authorize="!isAuthenticated()">Welcome, user</h1>
+                <h1 sec:authorize="!isAuthenticated()">Welcome, stranger</h1>
                 <h1 sec:authorize="isAuthenticated()" th:text="'Welcome, ' + ${name} + '!'"/>
                 <div sec:authorize="!isAuthenticated()" class="form-group">
                     <a href="/login" class="btn btn-block btn-success">Login</a>
@@ -23,18 +23,20 @@
                 <div sec:authorize="!isAuthenticated()" class="form-group">
                     <a href="/registration" class="btn btn-block btn-success">Registration</a>
                 </div>
-                <div class="form-group">
+                <div sec:authorize="isAuthenticated()" class="form-group">
                     <a href="/query" class="btn btn-block btn-success">Query</a>
                 </div>
                 <div sec:authorize="hasRole('ROLE_ADMIN')" class="form-group">
                     <a href="/admin" class="btn btn-block btn-success">Admin</a>
+                </div>
+                <div sec:authorize="isAuthenticated()" class="form-group">
+                    <a href="/logout" class="btn btn-block btn-danger">Logout</a>
                 </div>
             </form>
         </div>
         <div class="col-md-4 col-sm-4 col-xs-12"></div>
     </div>
 </div>
-
 
 
 <!-- Optional JavaScript -->

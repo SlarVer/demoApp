@@ -19,12 +19,19 @@ public class RegistrationController {
         return "registration";
     }
 
-    //TODO: ДОБАВИТЬ ОБРАБОТКУ РЕГИСТРАЦИИ УЖЕ СУЩЕСТВУЮЩЕГО ПОЛЬЗОВАТЕЛЯ
+    //TODO: Immediate login after registration
     @PostMapping("/registration")
-    public String registrationProcess(@RequestParam String username, @RequestParam String password, Model model){
-        User user = new User(username, password);
-        if(userService.saveUser(user)){
-            return "redirect:/";
-        } else return "registration";
+    public String registrationProcess(@RequestParam String username, @RequestParam String password,
+                                      @RequestParam String passwordConfirm, Model model){
+        if (userService.loadUserByUsername(username) != null){
+            model.addAttribute("message", "Username is already taken!");
+            return "registration";
+        } else if (!password.equals(passwordConfirm)){
+            model.addAttribute("message", "Passwords don't match!");
+            return "registration";
+        } else {
+            userService.saveUser(new User(username, password));
+            return "redirect:login";
+        }
     }
 }
