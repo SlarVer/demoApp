@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Admin</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <p>Admin page</p>
+    <button type="submit">Show all users</button>
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Username</th>
+            <th>Password</th>
+        </tr>
+        <div th:each="user : ${allUsers}">
+            <tr>
+                <th th:text="${user.id}"/>
+                <th th:text="${user.username}"/>
+                <th th:text="${user.password}"/>
+            </tr>
+        </div>
+    </table>
+</body>
+</html>
