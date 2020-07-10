@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <title>Query</title>
+</head>
+<body class="bg">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-1 col-sm-1 col-xs-12"></div>
+        <div class="col-md-4 col-sm-4 col-xs-12">
+            <form action="/query" method="get" class="form-container">
+                <h2 style="text-align: center">All the data</h2>
+                <table class="table-bordered border" align="center">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Surname</th>
+                        <th>Birthdate</th>
+                        <th>Weight</th>
+                        <th>Height</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="player: ${allPlayers}">
+                        <th th:text="${player.getId()}"/>
+                        <th th:text="${player.getName()}"/>
+                        <th th:text="${player.getSurname()}"/>
+                        <th th:text="${player.getBirthDate()}"/>
+                        <th th:text="${player.getWeight()}"/>
+                        <th th:text="${player.getHeight()}"/>
+                    </tr>
+                    </tbody>
+                </table>
+                <button type="submit" class="btn btn-success" style="margin-left: 40%">Execute</button>
+            </form>
+            <div class="form-group">
+                <a href="/" class="btn btn-secondary btn-block">Main page</a>
+            </div>
+        </div>
+        <div class="col-md-2 col-sm-2 col-xs-12"></div>
+        <div class="col-md-4 col-sm-4 col-xs-12">
+            <form action="/query" method="post" class="form-container">
+                <h2 style="text-align: center">Select data</h2>
+                <div class="form-group">
+                    <h5 style="margin-left: 15px">Birthdate:</h5>
+                    <div class="col-md-6 col-sm-6 col-xs-12" style="float: left">
+                        <input type="text" name="dateStart" id="dateStart" placeholder="From"
+                               autofocus="true" class="form-control">
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-12" style="float: left">
+                        <input type="text" name="dateEnd" id="dateEnd" placeholder="To"
+                               autofocus="true" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <h5 style="margin-left: 15px">Weight:</h5>
+                    <div class="col-md-6 col-sm-6 col-xs-12" style="float: left">
+                        <input type="text" name="weightStart" id="weightStart" placeholder="From"
+                               autofocus="true" class="form-control">
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-12" style="float: left">
+                        <input type="text" name="weightEnd" id="weightEnd" placeholder="To"
+                               autofocus="true" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <h5 style="margin-left: 15px">Height:</h5>
+                    <div class="col-md-6 col-sm-6 col-xs-12" style="float: left">
+                        <input type="text" name="heightStart" id="heightStart" placeholder="From"
+                                   autofocus="true" class="form-control">
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-12" style="float: left">
+                        <input type="text" name="heightEnd" id="heightEnd" placeholder="To"
+                                   autofocus="true" class="form-control">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-success" style="margin-left: 40%">Select</button>
+            </form>
+        </div>
+        <div class="col-md-1 col-sm-1 col-xs-12"></div>
+    </div>
+</div>
+
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
