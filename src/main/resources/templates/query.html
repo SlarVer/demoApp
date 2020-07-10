@@ -83,6 +83,29 @@
                     </div>
                 </div>
                 <button type="submit" class="btn btn-success" style="margin-left: 40%">Select</button>
+                <p th:if="${message != null}" class="alert alert-danger" th:text="${message}"/>
+                <table th:if="${selectedPlayers != null}" class="table-bordered border" align="center">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Surname</th>
+                        <th>Birthdate</th>
+                        <th>Weight</th>
+                        <th>Height</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="player: ${selectedPlayers}">
+                        <th th:text="${player.getId()}"/>
+                        <th th:text="${player.getName()}"/>
+                        <th th:text="${player.getSurname()}"/>
+                        <th th:text="${player.getBirthDate()}"/>
+                        <th th:text="${player.getWeight()}"/>
+                        <th th:text="${player.getHeight()}"/>
+                    </tr>
+                    </tbody>
+                </table>
             </form>
         </div>
         <div class="col-md-1 col-sm-1 col-xs-12"></div>
