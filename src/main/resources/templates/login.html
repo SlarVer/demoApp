@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -7,9 +7,10 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
     <title>Login</title>
 </head>
-<body>
+<body class="bg">
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-4 col-sm-4 col-xs-12"></div>
@@ -27,6 +28,7 @@
                            class="form-control">
                 </div>
                 <button type="submit" class="btn btn-success btn-block">Login</button>
+                <p th:if="${message != null}" class="alert alert-danger" th:text="${message}"/>
                 <div class="form-group">
                     <a href="/registration" class="btn btn-secondary btn-block">Registration</a>
                 </div>

@@ -15,7 +15,6 @@ import java.util.List;
 
 @Service
 public class UserService implements UserDetailsService {
-
     @Autowired
     UserRepository userRepository;
 
@@ -33,21 +32,13 @@ public class UserService implements UserDetailsService {
         return true;
     }
 
-    public String loadUser(String username, String password){
-        if (userRepository.findByUsername(username) == null){
-            return "Incorrect username";
-        } else if (userRepository.findByUsernameAndPassword(username, password) == null){
-            return "Incorrect password";
-        } else return "Correct";
-    }
-
     public List<User> allUsers(){
         return userRepository.findAll();
     }
 
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username) /*throws UsernameNotFoundException*/ {
         User user = userRepository.findByUsername(username);
 
 //        if (user == null) {
