@@ -29,8 +29,9 @@ public class QueryController {
     }
 
     @PostMapping("/query")
-    public String queryExecute(@RequestParam Date dateStart, @RequestParam Date dateEnd, @RequestParam int weightStart,
-                               @RequestParam int weightEnd, @RequestParam int heightStart, @RequestParam int heightEnd,
+    public String queryExecute(@RequestParam(defaultValue = "1900-1-1") Date dateStart, @RequestParam(defaultValue = "2020-12-12") Date dateEnd,
+                               @RequestParam(defaultValue = "0") int weightStart, @RequestParam(defaultValue = "200") int weightEnd,
+                               @RequestParam(defaultValue = "0") int heightStart, @RequestParam(defaultValue = "250") int heightEnd,
                                Model model, Principal principal) {
         List<Player> selectedPlayers = queryService.select(dateStart, dateEnd, weightStart, weightEnd, heightStart, heightEnd, principal);
         if (selectedPlayers.isEmpty()) {

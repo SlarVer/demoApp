@@ -1,6 +1,8 @@
 package com.demo.demoApp.entities;
 
 import javax.persistence.*;
+import java.sql.Date;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name = "queries")
@@ -12,6 +14,8 @@ public class Query {
     private String request;
 
     private String response;
+
+    private Timestamp timestamp;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
@@ -49,9 +53,21 @@ public class Query {
         this.author = author;
     }
 
-    public Query(String request, String response, User author) {
+    public Timestamp getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Timestamp timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public Query(){
+    }
+
+    public Query(String request, String response, Timestamp timestamp, User author) {
         this.request = request;
         this.response = response;
+        this.timestamp = timestamp;
         this.author = author;
     }
 }

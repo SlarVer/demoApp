@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.security.Principal;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Service
@@ -29,7 +30,11 @@ public class QueryService {
                 dateStart, dateEnd, weightStart, weightEnd, heightStart, heightEnd);
         queryRepository.save(new Query("Birthdate: " + dateStart + " - " + dateEnd + ", weight: " +
                 weightStart + " - " + weightEnd + ", height: " + heightStart + " - " + heightEnd,
-                resultList.size() + " players selected", userRepository.findByUsername(principal.getName())));
+                resultList.size() + " players selected", new Timestamp(System.currentTimeMillis()), userRepository.findByUsername(principal.getName())));
         return resultList;
+    }
+
+    public List<Query> logs(Principal principal) {
+        return queryRepository.findAllByAuthor(userRepository.findByUsername(principal.getName()));
     }
 }
