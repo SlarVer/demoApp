@@ -43,7 +43,7 @@
         </div>
         <div class="col-md-2 col-sm-2 col-xs-12">
             <div class="form-group" style="float: bottom">
-                <a href="/" class="btn btn-secondary btn-block">Main page</a>
+                <a href="/" class="btn btn-small btn-secondary">Main page</a>
             </div>
         </div>
         <div class="col-md-4 col-sm-4 col-xs-12">
@@ -82,7 +82,9 @@
                                    autofocus="true" class="form-control">
                     </div>
                 </div>
-                <button type="submit" class="btn btn-success" style="margin-left: 40%">Select</button>
+                <div style="text-align: center">
+                    <button type="submit" class="btn btn-small btn-success">Select</button>
+                </div>
                 <p th:if="${message != null}" class="alert alert-danger" th:text="${message}"/>
                 <table th:if="${selectedPlayers != null}" class="table-bordered border" align="center" style="margin-top: 20px">
                     <thead>

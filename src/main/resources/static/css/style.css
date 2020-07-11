@@ -8,6 +8,10 @@
     margin-top: 30px;
 }
 
+.btn-small {
+    width: 180px;
+}
+
 .form-container {
     border: 0px solid #000000;
     padding: 50px 60px;

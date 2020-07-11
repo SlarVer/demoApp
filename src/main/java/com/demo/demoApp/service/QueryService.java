@@ -34,7 +34,15 @@ public class QueryService {
         return resultList;
     }
 
-    public List<Query> logs(Principal principal) {
+    public List<Query> currentUserLogs(Principal principal) {
         return queryRepository.findAllByAuthor(userRepository.findByUsername(principal.getName()));
+    }
+
+    public List<Query> userLogs(User user) {
+        return queryRepository.findAllByAuthor(user);
+    }
+
+    public List<Query> allLogs() {
+        return queryRepository.findAll();
     }
 }

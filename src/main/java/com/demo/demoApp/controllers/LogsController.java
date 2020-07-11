@@ -17,7 +17,7 @@ public class LogsController {
 
     @GetMapping("/logs")
     public String logs(Model model, Principal principal){
-        List<Query> logs = queryService.logs(principal);
+        List<Query> logs = queryService.currentUserLogs(principal);
         if (logs.isEmpty()) {
             model.addAttribute("message", "Your have no logs");
         } else {
