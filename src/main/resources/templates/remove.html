@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <title>Remove by stats</title>
+</head>
+<body class="bg">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4 col-sm-4 col-xs-12"></div>
+        <div class="col-md-4 col-sm-4 col-xs-12">
+            <form action="/query/remove" method="post" class="form-container">
+                <h2>Remove players by stats</h2>
+                <div class="form-group">
+                    <h5 style="margin-left: 15px">Birthdate:</h5>
+                    <div class="col-md-6 col-sm-6 col-xs-12" style="float: left">
+                        <input type="text" name="dateStart" id="dateStart" placeholder="From"
+                               autofocus="true" class="form-control">
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-12" style="float: left">
+                        <input type="text" name="dateEnd" id="dateEnd" placeholder="To"
+                               autofocus="true" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <h5 style="margin-left: 15px">Weight:</h5>
+                    <div class="col-md-6 col-sm-6 col-xs-12" style="float: left">
+                        <input type="text" name="weightStart" id="weightStart" placeholder="From"
+                               autofocus="true" class="form-control">
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-12" style="float: left">
+                        <input type="text" name="weightEnd" id="weightEnd" placeholder="To"
+                               autofocus="true" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <h5 style="margin-left: 15px">Height:</h5>
+                    <div class="col-md-6 col-sm-6 col-xs-12" style="float: left">
+                        <input type="text" name="heightStart" id="heightStart" placeholder="From"
+                               autofocus="true" class="form-control">
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-12" style="float: left">
+                        <input type="text" name="heightEnd" id="heightEnd" placeholder="To"
+                               autofocus="true" class="form-control">
+                    </div>
+                </div>
+                <div style="text-align: center">
+                    <button type="submit" class="btn btn-small btn-success">Remove</button>
+                </div>
+                <p th:if="${deleteErrorMessage != null}" class="alert alert-danger" th:text="${deleteErrorMessage}"/>
+                <p th:if="${deleteSuccessMessage != null}" class="alert alert-success" th:text="${deleteSuccessMessage}"/>
+                <div class="form-group" style="text-align: center">
+                    <a href="/query" class="btn btn-small btn-secondary">Back</a>
+                </div>
+                <div class="form-group" style="text-align: center">
+                    <a href="/" class="btn btn-small btn-secondary">Main page</a>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-4 col-sm-4 col-xs-12"/>
+        <div class="col-md-4 col-sm-4 col-xs-12"></div>
+    </div>
+</div>
+
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,6 +1,9 @@
 package com.demo.demoApp.entities;
 
+import com.sun.istack.NotNull;
+
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.sql.Date;
 
 @Entity
@@ -10,14 +13,21 @@ public class Player {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull
+    @Size(min = 2, max = 30)
     private String name;
 
+    @NotNull
+    @Size(min = 2, max = 30)
     private String surname;
 
+    @NotNull
     private Date birthDate;
 
+    @NotNull
     private int weight;
 
+    @NotNull
     private int height;
 
     public Long getId() {
@@ -66,5 +76,15 @@ public class Player {
 
     public void setWeight(int weight) {
         this.weight = weight;
+    }
+
+    public Player() {}
+
+    public Player(String name, String surname, Date birthDate, int weight, int height) {
+        this.name = name;
+        this.surname = surname;
+        this.birthDate = birthDate;
+        this.weight = weight;
+        this.height = height;
     }
 }

@@ -13,7 +13,6 @@
 <body class="bg">
 <div class="container-fluid">
     <div class="row">
-<!--        <div class="col-md-1 col-sm-1 col-xs-12"></div>-->
         <div class="col-md-4 col-sm-4 col-xs-12">
             <form class="form-container" action="/admin" method="get">
                 <h2 style="text-align: center">All users</h2>
@@ -64,9 +63,10 @@
             </div>
         </div>
         <div class="col-md-4 col-sm-4 col-xs-12">
-            <form action="/admin" method="post" class="form-container">
+            <form action="/admin/show" method="post" class="form-container">
                 <div class="form-group">
-                    <label for="username">Show user's logs</label>
+                    <h2 style="text-align: center">Show user's logs</h2>
+                    <label for="username">Select user</label>
                     <input type="text" name="username" id="username" placeholder="Enter username"
                            class="form-control">
                 </div>
@@ -95,8 +95,19 @@
                     </tbody>
                 </table>
             </form>
+            <form action="/admin/block" method="post" class="form-container">
+                <div class="form-group">
+                    <h2 style="text-align: center">Block user</h2>
+                    <label for="blockUsername">Select user</label>
+                    <input type="text" name="blockUsername" id="blockUsername" placeholder="Enter username"
+                           class="form-control">
+                </div>
+                <div style="text-align: center">
+                    <button type="submit" class="btn btn-small btn-success">Block</button>
+                </div>
+                <p th:if="${blockMessage != null}" class="alert alert-danger" th:text="${blockMessage}"/>
+            </form>
         </div>
-<!--        <div class="col-md-1 col-sm-1 col-xs-12"></div>-->
     </div>
 </div>
 

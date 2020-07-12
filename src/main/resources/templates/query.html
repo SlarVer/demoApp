@@ -13,7 +13,6 @@
 <body class="bg">
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-1 col-sm-1 col-xs-12"></div>
         <div class="col-md-4 col-sm-4 col-xs-12">
             <form action="/query" method="get" class="form-container">
                 <h2 style="text-align: center">All the data</h2>
@@ -41,14 +40,25 @@
                 </table>
             </form>
         </div>
-        <div class="col-md-2 col-sm-2 col-xs-12">
-            <div class="form-group" style="float: bottom">
-                <a href="/" class="btn btn-small btn-secondary">Main page</a>
+        <div class="col-md-4 col-sm-4 col-xs-12" style="text-align: center">
+            <div class="form-container">
+                <div sec:authorize="hasRole('ROLE_ADMIN')" class="form-group">
+                    <a href="/query/add" class="btn btn-block btn-success">Add players</a>
+                </div>
+                <div sec:authorize="hasRole('ROLE_ADMIN')" class="form-group">
+                    <a href="/query/removeByName" class="btn btn-block btn-success">Remove concrete player</a>
+                </div>
+                <div sec:authorize="hasRole('ROLE_ADMIN')" class="form-group">
+                    <a href="/query/remove" class="btn btn-block btn-success">Remove players by stats</a>
+                </div>
+                <div class="form-group" style="float: bottom">
+                    <a href="/" class="btn btn-block btn-secondary">Main page</a>
+                </div>
             </div>
         </div>
         <div class="col-md-4 col-sm-4 col-xs-12">
             <form action="/query" method="post" class="form-container">
-                <h2 style="text-align: center">Select data</h2>
+                <h2 style="text-align: center">Select players</h2>
                 <div class="form-group">
                     <h5 style="margin-left: 15px">Birthdate:</h5>
                     <div class="col-md-6 col-sm-6 col-xs-12" style="float: left">
@@ -110,7 +120,6 @@
                 </table>
             </form>
         </div>
-        <div class="col-md-1 col-sm-1 col-xs-12"></div>
     </div>
 </div>
 

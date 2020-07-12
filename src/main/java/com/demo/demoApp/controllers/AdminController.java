@@ -5,6 +5,7 @@ import com.demo.demoApp.entities.User;
 import com.demo.demoApp.service.QueryService;
 import com.demo.demoApp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,18 +34,29 @@ public class AdminController {
         return "admin";
     }
 
-    @PostMapping("/admin")
-    public String allUsers(@RequestParam(defaultValue = "") String username, Model model){
-        User user = (User)userService.loadUserByUsername(username);
-        if (user == null) {
-            model.addAttribute("logsMessage", "User not found");
-        } else {
+    @PostMapping("/admin/show")
+    public String logsUser(@RequestParam(defaultValue = "") String username, Model model){
+        try{
+            User user = (User)userService.loadUserByUsername(username);
             List<Query> userLogs = queryService.userLogs(user);
             if (userLogs.isEmpty()) {
-                model.addAttribute("logsMessage", user.getUsername() + "'s logs are empty");
+                model.addAttribute("logsMessage", username + "'s logs are empty");
             } else {
                 model.addAttribute("userLogs", userLogs);
             }
+        } catch (UsernameNotFoundException exception) {
+            model.addAttribute("logsMessage", exception.getMessage());
+        }
+        return "admin";
+    }
+
+    @PostMapping("/admin/block")
+    public String deleteUser(@RequestParam(defaultValue = "") String blockUsername, Model model) {
+        try {
+            userService.blockUser(blockUsername);
+            model.addAttribute("blockMessage", "User successfully blocked");
+        } catch (UsernameNotFoundException exception){
+            model.addAttribute("blockMessage", exception.getMessage());
         }
         return "admin";
     }

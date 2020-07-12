@@ -23,7 +23,8 @@ public class RegistrationController {
     @PostMapping("/registration")
     public String registrationProcess(@RequestParam String username, @RequestParam String password,
                                       @RequestParam String passwordConfirm, Model model){
-        if (userService.loadUserByUsername(username) != null){
+
+        if (userService.loadUser(username) != null){
             model.addAttribute("message", "Username is already taken!");
             return "registration";
         } else if (!password.equals(passwordConfirm)){

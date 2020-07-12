@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Collections;
 import java.util.List;
 
@@ -21,29 +22,35 @@ public class UserService implements UserDetailsService {
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public boolean saveUser(User user){
-        User userFromDB = userRepository.findByUsername(user.getUsername());
-        if (userFromDB != null){
-            return false;
-        }
+    public void saveUser(User user){
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setRoles(Collections.singleton(new Role(1L, "ROLE_USER")));
+        user.setBlocked(false);
         userRepository.save(user);
-        return true;
     }
 
     public List<User> allUsers(){
         return userRepository.findAll();
     }
 
+    public User loadUser(String username) {
+        return userRepository.findByUsername(username);
+    }
+
     @Override
-    public UserDetails loadUserByUsername(String username) /*throws UsernameNotFoundException*/ {
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username);
-
-//        if (user == null) {
-//            throw new UsernameNotFoundException("User not found");
+        if (user == null) {
+            throw new UsernameNotFoundException("User \"" + username + "\" not found");
+        }
+//        else if (user.isBlocked()) {
+//            throw new UsernameNotFoundException("User blocked");
 //        }
-
         return user;
+    }
+
+    @Transactional
+    public void blockUser(String username){
+        userRepository.findByUsername(username).setBlocked(true);
     }
 }

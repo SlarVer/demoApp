@@ -9,4 +9,5 @@ import java.util.List;
 public interface PlayerRepository extends JpaRepository<Player, Long> {
     List<Player> findAllByBirthDateBetweenAndWeightBetweenAndHeightBetween(Date dateStart, Date dateEnd, int weightStart, int weightEnd,
                                                                    int heightStart, int heightEnd);
+    Player findByNameAndSurname(String name, String surname);
 }
