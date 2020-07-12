@@ -59,6 +59,14 @@ public class User implements UserDetails {
         this.blocked = blocked;
     }
 
+    public String status() {
+        if (isBlocked()) {
+            return "blocked";
+        } else {
+            return "active";
+        }
+    }
+
     public String getRolesToString() {
         StringBuilder stringBuilder = new StringBuilder();
         for (Role role: getRoles()){
@@ -78,7 +86,7 @@ public class User implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        return !isBlocked();
     }
 
     @Override

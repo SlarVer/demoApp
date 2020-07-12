@@ -51,12 +51,29 @@ public class AdminController {
     }
 
     @PostMapping("/admin/block")
-    public String deleteUser(@RequestParam(defaultValue = "") String blockUsername, Model model) {
+    public String blockUser(@RequestParam(defaultValue = "") String blockUsername, Model model) {
         try {
-            userService.blockUser(blockUsername);
-            model.addAttribute("blockMessage", "User successfully blocked");
-        } catch (UsernameNotFoundException exception){
-            model.addAttribute("blockMessage", exception.getMessage());
+            if (userService.blockUser(blockUsername)) {
+                model.addAttribute("blockSuccessMessage", "User \"" + blockUsername + "\" successfully blocked");
+            } else {
+                model.addAttribute("blockErrorMessage", "User \"" + blockUsername + "\" is already blocked");
+            }
+        } catch (UsernameNotFoundException exception) {
+            model.addAttribute("blockErrorMessage", exception.getMessage());
+        }
+        return "admin";
+    }
+
+    @PostMapping("/admin/unlock")
+    public String unlockUser(@RequestParam(defaultValue = "") String unlockUsername, Model model) {
+        try {
+            if (userService.unlockUser(unlockUsername)) {
+                model.addAttribute("unlockSuccessMessage", "User \"" + unlockUsername + "\" successfully unlocked");
+            } else {
+                model.addAttribute("unlockErrorMessage", "User \"" + unlockUsername + "\" is not blocked");
+            }
+        } catch (UsernameNotFoundException exception) {
+            model.addAttribute("unlockErrorMessage", exception.getMessage());
         }
         return "admin";
     }

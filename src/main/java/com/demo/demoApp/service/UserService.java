@@ -43,14 +43,33 @@ public class UserService implements UserDetailsService {
         if (user == null) {
             throw new UsernameNotFoundException("User \"" + username + "\" not found");
         }
-//        else if (user.isBlocked()) {
-//            throw new UsernameNotFoundException("User blocked");
-//        }
+        else if (user.isBlocked()) {
+            throw new UsernameNotFoundException("User blocked");
+        }
         return user;
     }
 
     @Transactional
-    public void blockUser(String username){
-        userRepository.findByUsername(username).setBlocked(true);
+    public boolean blockUser(String username){
+        User user = userRepository.findByUsername(username);
+        if (user == null) {
+            throw new UsernameNotFoundException("User \"" + username + "\" not found");
+        } else if (!user.isBlocked()) {
+            user.setBlocked(true);
+            return true;
+        }
+        return false;
+    }
+
+    @Transactional
+    public boolean unlockUser(String username) {
+        User user = userRepository.findByUsername(username);
+        if (user == null) {
+            throw new UsernameNotFoundException("User \"" + username + "\" not found");
+        } else if (user.isBlocked()){
+            user.setBlocked(false);
+            return true;
+        }
+        return false;
     }
 }
